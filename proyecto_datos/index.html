@@ -92,11 +92,7 @@
               <p>Hola,</p>
               <p>¿Qué dato buscas?</p>
               <select id="data-type">
-                <option>Tipo de dato</option>
-                <option>Dato 1</option>
-                <option>Dato 2</option>
-                <option>Dato 3</option>
-                <option>Dato 4</option>
+                <option value="">Tipo de dato</option>
               </select>
               <p>¿Dónde?</p>
               <select id="country">
@@ -129,4 +125,60 @@
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/jquery-ui.js"></script>
   <script src="assets/js/scripts.js"></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+          apiKey: "AIzaSyAtl3jci0x7mnTJhri0csZkoopVl1nZlrU",
+          authDomain: "local-com.firebaseapp.com",
+          databaseURL: "https://local-com.firebaseio.com",
+          projectId: "local-com",
+          storageBucket: "local-com.appspot.com",
+          messagingSenderId: "467950118752",
+          appId: "1:467950118752:web:2ca52245ef46eebed72005"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+  <script>
+      var items = [];
+      var types = [];
+      function handleRead() {
+          firebase.database().ref('Alternativo').once('value').then(function(snapshot) {
+              var select = document.getElementById("data-type");
+
+              items = snapshot.val();
+              for (i = 0; i < items.length; i++) {
+                  var type = items[i]["representa"];
+                  if (types.includes(type) || type.length == 0) {
+                      continue;
+                  }
+
+                  var option = document.createElement("option");
+                  option.value = i;
+                  option.text = type;
+                  select.add(option);
+
+                  types.push(type);
+              }
+
+              console.log(types);
+          });
+      }
+
+      function handleRequest() {
+
+      }
+
+      window.addEventListener('load', handleRead, false);
+      document.getElementById('request-consult-btn').addEventListener('click', handleRequest, false);
+  </script>
 </html>
