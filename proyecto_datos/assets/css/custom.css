@@ -1,0 +1,68 @@
+header {
+  padding: 15px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+header .logo {
+  max-width: 400px;
+}
+
+a.btn-1 {
+  padding: 10px 30px;
+  display: inline-block;
+}
+
+a.btn-1.disabled,
+a.btn-1.disabled:hover {
+  background-image: none;
+  background: grey;
+}
+
+a.btn-1.disabled:hover:before {
+  opacity: 0;
+}
+
+.consult-step,
+.action-step,
+.data-step {
+  display: none;
+}
+
+p {
+  color: #000000;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 15px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.wrapper-btn {
+  text-align: center;
+}
+
+input {
+  padding: 5px 15px;
+  margin-bottom: 15px;
+}
+
+select {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 0 15px;
+  min-height: 35px;
+  border-color: #a9a9a9;
+}
