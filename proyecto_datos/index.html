@@ -67,13 +67,15 @@
 
         <div class="step action-step" id="action-step">
           <div class="row">
-            <div class="col-12 text-center">
-              <input id="name" placeholder="Nombre" />
+            <div class="col-12 col-sm-4 offset-sm-4 text-center">
+              <input
+                autocomplete="off"
+                type="text"
+                id="name"
+                placeholder="Nombre"
+              />
               <p>
-                <a
-                  id="collaborate-btn"
-                  class="btn-1 disabled smoothscroll"
-                  href="#"
+                <a id="collaborate-btn" class="btn-1 smoothscroll" href="#"
                   >Colaborar</a
                 >
               </p>
@@ -82,6 +84,60 @@
                   >Consultar</a
                 >
               </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step collaborate-step" id="collaborate-step">
+          <div class="row">
+            <div class="col-12 col-sm-6 offset-sm-3">
+              <p>Hola,</p>
+              <p>Explica el dato que aportas:</p>
+              <input
+                autocomplete="off"
+                type="text"
+                placeholder="Nombre del dato"
+              />
+              <div class="radio-wrapper">
+                <p>¿Eres el data owner?</p>
+                <input type="radio" name="owner" value="yes" />
+                <label>Sí</label>
+                <input type="radio" name="owner" value="no" />
+                <label>No</label>
+              </div>
+              <input autocomplete="off" type="text" placeholder="Fuente" />
+              <select>
+                <option value="">Tipo de dato</option>
+              </select>
+              <select>
+                <option>Consumo de api</option>
+              </select>
+              <select>
+                <option>Frecuencia</option>
+              </select>
+              <select>
+                <option>Qué faceta de la pandemia ayuda a entender</option>
+              </select>
+              <div class="wrapper-btn">
+                <a
+                  id="request-collaborate-btn"
+                  class="btn-1 smoothscroll"
+                  href="#"
+                  >Proponer nuevo dato</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step thanks-step" id="thanks-step">
+          <div class="row">
+            <div class="col-12 col-sm-8 offset-sm-2 text-center">
+              <p>Gracias por proponer un nuevo dato.</p>
+              <p>Te contactaremos.</p>
+              <div class="wrapper-btn">
+                <a class="btn-1 smoothscroll" href="index.html">Volver</a>
+              </div>
             </div>
           </div>
         </div>
@@ -129,64 +185,68 @@
       https://firebase.google.com/docs/web/setup#available-libraries -->
 
   <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-          apiKey: "AIzaSyAtl3jci0x7mnTJhri0csZkoopVl1nZlrU",
-          authDomain: "local-com.firebaseapp.com",
-          databaseURL: "https://local-com.firebaseio.com",
-          projectId: "local-com",
-          storageBucket: "local-com.appspot.com",
-          messagingSenderId: "467950118752",
-          appId: "1:467950118752:web:2ca52245ef46eebed72005"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAtl3jci0x7mnTJhri0csZkoopVl1nZlrU",
+      authDomain: "local-com.firebaseapp.com",
+      databaseURL: "https://local-com.firebaseio.com",
+      projectId: "local-com",
+      storageBucket: "local-com.appspot.com",
+      messagingSenderId: "467950118752",
+      appId: "1:467950118752:web:2ca52245ef46eebed72005",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   </script>
 
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
   <script>
-      var items = [];
-      var types = [];
-      var countries = [];
-      function handleRead() {
-          firebase.database().ref('Alternativo').once('value').then(function(snapshot) {
-              var typeSelect = document.getElementById("data-type");
-              var countrySelect = document.getElementById("country");
+    var items = [];
+    var types = [];
+    var countries = [];
+    function handleRead() {
+      firebase
+        .database()
+        .ref("Alternativo")
+        .once("value")
+        .then(function (snapshot) {
+          var typeSelect = document.getElementById("data-type");
+          var countrySelect = document.getElementById("country");
 
-              items = snapshot.val();
-              for (i = 0; i < items.length; i++) {
-                  var type = items[i]["representa"];
-                  if (types.includes(type) || type.length == 0) {
-                      continue;
-                  }
+          items = snapshot.val();
+          for (i = 0; i < items.length; i++) {
+            var type = items[i]["representa"];
+            if (types.includes(type) || type.length == 0) {
+              continue;
+            }
 
-                  var typeOption = document.createElement("option");
-                  typeOption.value = type;
-                  typeOption.text = type;
-                  typeSelect.add(typeOption);
+            var typeOption = document.createElement("option");
+            typeOption.value = type;
+            typeOption.text = type;
+            typeSelect.add(typeOption);
 
-                  types.push(type);
+            types.push(type);
 
-                  var country = items[i]["pais"];
-                  if (countries.includes(country) || country.length == 0) {
-                    continue;
-                  }
+            var country = items[i]["pais"];
+            if (countries.includes(country) || country.length == 0) {
+              continue;
+            }
 
-                  var countryOption = document.createElement("option");
-                  countryOption.value = country;
-                  countryOption.text = country;
-                  countrySelect.add(countryOption);
+            var countryOption = document.createElement("option");
+            countryOption.value = country;
+            countryOption.text = country;
+            countrySelect.add(countryOption);
 
-                  countries.push(country);
-              }
-          });
-      }
+            countries.push(country);
+          }
+        });
+    }
 
-      function handleRequest() {
+    function handleRequest() {}
 
-      }
-
-      window.addEventListener('load', handleRead, false);
-      document.getElementById('request-consult-btn').addEventListener('click', handleRequest, false);
+    window.addEventListener("load", handleRead, false);
+    document
+      .getElementById("request-consult-btn")
+      .addEventListener("click", handleRequest, false);
   </script>
 </html>

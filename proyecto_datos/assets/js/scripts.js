@@ -19,6 +19,18 @@ $(document).ready(function () {
     $("#consult-step").show();
   });
 
+  $("#collaborate-btn").click((e) => {
+    e.preventDefault();
+    $("#action-step").hide();
+    $("#collaborate-step").show();
+  });
+
+  $("#request-collaborate-btn").click((e) => {
+    e.preventDefault();
+    $("#collaborate-step").hide();
+    $("#thanks-step").show();
+  });
+
   $("#request-consult-btn").click((e) => {
     e.preventDefault();
     alert($("#data-type").val());

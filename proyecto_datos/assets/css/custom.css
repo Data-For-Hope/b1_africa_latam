@@ -35,7 +35,9 @@ a.btn-1.disabled:hover:before {
 
 .consult-step,
 .action-step,
-.data-step {
+.data-step,
+.collaborate-step,
+.thanks-step {
   display: none;
 }
 
@@ -46,6 +48,14 @@ p {
   margin-bottom: 15px;
 }
 
+.radio-wrapper label {
+  margin-right: 30px;
+}
+
+.radio-wrapper {
+  margin-bottom: 5px;
+}
+
 .title {
   margin-bottom: 30px;
 }
@@ -54,9 +64,10 @@ p {
   text-align: center;
 }
 
-input {
+input[type="text"] {
   padding: 5px 15px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 select {
