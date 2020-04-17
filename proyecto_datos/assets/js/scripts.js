@@ -33,9 +33,13 @@ $(document).ready(function () {
 
   $("#request-consult-btn").click((e) => {
     e.preventDefault();
-    alert($("#data-type").val());
-    alert($("#country").val());
     $("#consult-step").hide();
     $("#data-step").show();
+  });
+
+  $("#guide-btn").click((e) => {
+    e.preventDefault();
+    $("#data-step").hide();
+    $("#guide-step").show();
   });
 });

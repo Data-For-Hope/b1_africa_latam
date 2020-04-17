@@ -37,7 +37,8 @@ a.btn-1.disabled:hover:before {
 .action-step,
 .data-step,
 .collaborate-step,
-.thanks-step {
+.thanks-step,
+.guide-step {
   display: none;
 }
 
@@ -46,6 +47,35 @@ p {
   font-size: 30px;
   line-height: 30px;
   margin-bottom: 15px;
+}
+
+p.desc {
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: bold;
+}
+
+p.percent,
+p.beds {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+p.percent {
+  color: orange;
+}
+
+p.beds {
+  color: red;
+}
+
+.graphic1 {
+  max-width: 400px;
+}
+
+.star {
+  max-width: 50px;
 }
 
 .radio-wrapper label {
