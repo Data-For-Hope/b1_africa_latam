@@ -97,10 +97,6 @@
               <p>¿Dónde?</p>
               <select id="country">
                 <option>País o región</option>
-                <option>Dato 1</option>
-                <option>Dato 2</option>
-                <option>Dato 3</option>
-                <option>Dato 4</option>
               </select>
               <div class="wrapper-btn">
                 <a id="request-consult-btn" class="btn-1 smoothscroll" href="#"
@@ -151,9 +147,11 @@
   <script>
       var items = [];
       var types = [];
+      var countries = [];
       function handleRead() {
           firebase.database().ref('Alternativo').once('value').then(function(snapshot) {
-              var select = document.getElementById("data-type");
+              var typeSelect = document.getElementById("data-type");
+              var countrySelect = document.getElementById("country");
 
               items = snapshot.val();
               for (i = 0; i < items.length; i++) {
@@ -162,15 +160,25 @@
                       continue;
                   }
 
-                  var option = document.createElement("option");
-                  option.value = i;
-                  option.text = type;
-                  select.add(option);
+                  var typeOption = document.createElement("option");
+                  typeOption.value = type;
+                  typeOption.text = type;
+                  typeSelect.add(typeOption);
 
                   types.push(type);
-              }
 
-              console.log(types);
+                  var country = items[i]["pais"];
+                  if (countries.includes(country) || country.length == 0) {
+                    continue;
+                  }
+
+                  var countryOption = document.createElement("option");
+                  countryOption.value = country;
+                  countryOption.text = country;
+                  countrySelect.add(countryOption);
+
+                  countries.push(country);
+              }
           });
       }
 
